@@ -6,22 +6,25 @@ export default class Answer extends Component {
         prop: PropTypes.func
     }
 
+    state = {
+        countVisible: false,
+    }
+
     render() {
+        const data = this.props.data;
 
-
-        const answersJSX = question.answers.map(answer => {
-            const answerId = `${question.id}${answer.id}`
+        const answersJSX = data.answers.map(answer => {
+            const idAnswer = "q"+data.id+"r"+answer.id;
             return (
-                <div key={answer.id} className="form-check container">
-                    <div className="row">
-                        <div className="col">
-                            <input type="radio" name="answer" className="form-check-input" id={answerId} onChange={this.props.onChange}/>
-                            <label htmlFor={answerId} className="form-check-label">{answer.name}</label>
-                        </div>
-                        <div className={`col`}>    
-                            <span>{this.state.displayVote? answer.count : ""}</span>
-                        </div>
-                    </div>
+                <div className="form-check">
+                    <input className="form-check-input" type="radio" 
+                    name={"radiogrp-"+data.id} id={idAnswer} 
+                    onChange={this.handleSelectedAnswer}
+                    value={answer.number} />
+                    <label className="form-check-label" htmlFor={idAnswer}>
+                        {answer.name} 
+                        {this.props.countVisible ? answer.count : ""} 
+                    </label>
                 </div>
             )
         })

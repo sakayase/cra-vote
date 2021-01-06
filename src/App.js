@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Form from './Form';
+import Question from './Question';
 
 class App extends Component {
   state = {
@@ -81,7 +81,7 @@ class App extends Component {
       const answerId = id.slice(1, 2);
       */
 
-
+/* Ancienne reponse: mauvaise car pas possible de séparer les questions
   handleSubmit = (event) => {
     let newState = this.state.questions;
     console.log(newState);
@@ -104,12 +104,16 @@ class App extends Component {
       questions: newState,
     })
   }
-
+*/
   render() {
+
+    const questionsJSX = this.state.questions.map(question => {
+      return <Question key={question.id} data={question} />
+    })
 
     return (
       <div className="App container">
-        <Form display={this.state.display} questions={this.state.questions} onSubmit={this.handleSubmit} onChange={this.handleChange}/>
+        {questionsJSX}
       </div>
     );
   }

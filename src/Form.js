@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+//ancienne réponse, impossible car ne sépare pas les questions
 class Form extends Component {
 
     state = {
