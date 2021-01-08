@@ -66,12 +66,16 @@ class App extends Component {
             id: 2,
             name: 'osef frero',
             count: 8,
+          },
+          {
+            id: 3,
+            name: 'La réponse D',
+            count: 8,
           }
         ],
         answer: '',
       }
-    ],
-    display: 'd-none',
+    ]
     
   }
 
@@ -105,10 +109,18 @@ class App extends Component {
     })
   }
 */
+
+
+  updateCount = (questionId, answerId) => {
+    const initialQuestions = this.state.questions;
+    initialQuestions[questionId].answers[answerId].count = initialQuestions[questionId].answers[answerId].count + 1; // penser a demander a jb pq sans 
+                                                                                                                     // setState il actualise l'object Questions dans le state
+  }                                                                                                                  // (meme instance ?)
+
   render() {
 
     const questionsJSX = this.state.questions.map(question => {
-      return <Question key={question.id} data={question} />
+      return <Question updateCount={this.updateCount} key={question.id} data={question} />
     })
 
     return (

@@ -11,16 +11,22 @@ class Question extends Component {
         this.setState({
             countVisible: true
         })
-
-        const question = this.props.data;
-        console.log(question);
-        console.log(this.state.selectedAnswer);
+        this.handleVoteCount();
     }
 
-    handleSelectedAnswer = (event) => {
+    handleSelectedChange = (event) => {
+        const id = event.target.id;
+        
         this.setState({
-            selectedAnswer: event.target.value
+            selectedAnswer: id,
         })
+    }
+    
+    handleVoteCount = () => {
+        const questionId = this.state.selectedAnswer.slice(0, 1);
+        const answerId = this.state.selectedAnswer.slice(1, 2);
+        console.log(this.props.onVote);
+        this.props.updateCount(questionId, answerId);
     }
 
     render() {
@@ -33,7 +39,7 @@ class Question extends Component {
                     {data.title}
                 </div>
                 <div className="card-body">
-                <form>
+                <form onChange={this.handleSelectedChange} >
                     <Answer countVisible={this.state.countVisible} data={data}/>
                 </form>
                 </div>
